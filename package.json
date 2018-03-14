@@ -4,6 +4,13 @@
   "description": "Native plugin wrappers for randdusing/cordova-plugin-bluetoothle",
   "author": "Charles Liu <dodoinblue@gmail.com>",
   "license": "MIT",
+  "module": "dist/@ionic-native/bluetooth-le/index.js",
+  "typings": "dist/@ionic-native/bluetooth-le/index.d.ts",
+  "peerDependencies": {
+    "@ionic-native/core": "^4.2.0",
+    "@angular/core": "*",
+    "rxjs": "^5.0.1"
+  },
   "devDependencies": {
     "@angular/compiler": "4.4.4",
     "@angular/compiler-cli": "4.4.4",
@@ -64,5 +71,9 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dodoinblue/ionic-native-bluetoothle"
   }
 }
