@@ -1,10 +1,10 @@
 {
-  "name": "@ionic-native/bluetooth-le",
+  "name": "bluetooth-le",
   "version": "0.0.1",
-  "description": "Ionic Native - Native plugins for ionic apps",
+  "description": "Ionic Native plugin wrappers for randdusing/cordova-plugin-bluetoothle",
   "module": "index.js",
   "typings": "index.d.ts",
-  "author": "ionic",
+  "author": "Charles Liu <dodoinblue@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
     "@ionic-native/core": "^4.2.0",
@@ -13,6 +13,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ionic-team/ionic-native.git"
+    "url": "https://github.com/dodoinblue/ionic-native-bluetoothle"
   }
 }

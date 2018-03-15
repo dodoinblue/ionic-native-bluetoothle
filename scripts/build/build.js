@@ -101,7 +101,7 @@ const addPluginToQueue = pluginName => {
         // clone package.json
         const packageJson = JSON.parse(JSON.stringify(PLUGIN_PACKAGE_JSON));
 
-        packageJson.name = `@ionic-native/${pluginName}`;
+        packageJson.name = `${pluginName}`;
         packageJson.version = IONIC_NATIVE_VERSION;
 
         return fs.writeJsonAsync(path.resolve(BUILD_DIST_ROOT, pluginName, 'package.json'), packageJson);
