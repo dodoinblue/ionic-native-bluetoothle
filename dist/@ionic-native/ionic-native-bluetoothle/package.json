@@ -1,5 +1,5 @@
 {
-  "name": "bluetooth-le",
+  "name": "ionic-native-bluetoothle",
   "version": "0.0.1",
   "description": "Ionic Native plugin wrappers for randdusing/cordova-plugin-bluetoothle",
   "module": "index.js",
