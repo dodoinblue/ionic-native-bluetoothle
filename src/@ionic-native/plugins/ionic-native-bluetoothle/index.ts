@@ -1,14 +1,5 @@
 /**
- * This is a template for new plugin wrappers
- *
- * TODO:
- * - Add/Change information below
- * - Document usage (importing, executing main functionality)
- * - Remove any imports that you are not using
- * - Add this file to /src/index.ts (follow style of other plugins)
- * - Remove all the comments included in this template, EXCEPT the @Plugin wrapper docs and any other docs you added
- * - Remove this note
- *
+ * This is a Ionic Native wrapper for cordova-plugin-bluetoothle
  */
 import { Injectable } from '@angular/core';
 import { Plugin, Cordova, CordovaProperty, IonicNativePlugin } from '@ionic-native/core';
@@ -16,23 +7,23 @@ import { Observable } from 'rxjs/Observable';
 import { InitParams, ScanParams, RetrieveConnectedParams, AddressParams, ConnectParams, DiscoverParams, ServicesDiscoverParams, CharacteristicsDiscoverParams, CharacteristicPath } from './models/BlePluginParams'
 
 /**
- * @name Bluetooth Le
+ * @name BluetoothLe
  * @description
- * This plugin does something
+ * This is a Ionic Native wrapper for cordova-plugin-bluetoothle
  *
  * @usage
  * ```typescript
- * import { BluetoothLe } from '@ionic-native/bluetooth-le';
+ * import { BluetoothLe } from 'ionic-native-bluetoothle'
  *
  *
- * constructor(private bluetoothLe: BluetoothLe) { }
+ * constructor(private ble: BluetoothLe) { }
  *
  * ...
  *
  *
- * this.bluetoothLe.functionName('Hello', 123)
- *   .then((res: any) => console.log(res))
- *   .catch((error: any) => console.error(error));
+ * this.ble.initialize().take(1).subscribe(result => {
+ *   console.log(`bluetooth status: ${result.status}`)
+ * })
  *
  * ```
  */
@@ -46,16 +37,6 @@ import { InitParams, ScanParams, RetrieveConnectedParams, AddressParams, Connect
 @Injectable()
 export class BluetoothLe extends IonicNativePlugin {
 
-  // /**
-  //  * This function does something
-  //  * @param arg1 {string} Some param to configure something
-  //  * @param arg2 {number} Another param to configure something
-  //  * @return {Promise<any>} Returns a promise that resolves when something happens
-  //  */
-  // @Cordova()
-  // functionName(arg1: string, arg2: number): Promise<any> {
-  //   return; // We add return; here to avoid any IDE / Compiler errors
-  // }
   /**
      * Initialize Bluetooth on the device. Must be called before anything else. Observable will 
      * continuously be used whenever Bluetooth is enabled or disabled & gatt server events.
