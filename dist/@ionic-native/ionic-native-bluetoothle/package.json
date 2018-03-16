@@ -1,6 +1,6 @@
 {
   "name": "ionic-native-bluetoothle",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Ionic Native plugin wrappers for randdusing/cordova-plugin-bluetoothle",
   "module": "index.js",
   "typings": "index.d.ts",

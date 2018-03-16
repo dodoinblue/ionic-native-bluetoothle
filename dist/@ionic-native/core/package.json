@@ -1,6 +1,6 @@
 {
   "name": "@ionic-native/core",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Ionic Native - Native plugins for ionic apps",
   "module": "index.js",
   "typings": "index.d.ts",

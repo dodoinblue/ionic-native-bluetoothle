@@ -2,23 +2,23 @@ import { IonicNativePlugin } from '@ionic-native/core';
 import { Observable } from 'rxjs/Observable';
 import { InitParams, ScanParams, RetrieveConnectedParams, AddressParams, ConnectParams, DiscoverParams, ServicesDiscoverParams, CharacteristicsDiscoverParams, CharacteristicPath } from './models/BlePluginParams';
 /**
- * @name Bluetooth Le
+ * @name BluetoothLe
  * @description
- * This plugin does something
+ * This is a Ionic Native wrapper for cordova-plugin-bluetoothle
  *
  * @usage
  * ```typescript
- * import { BluetoothLe } from '@ionic-native/bluetooth-le';
+ * import { BluetoothLe } from 'ionic-native-bluetoothle'
  *
  *
- * constructor(private bluetoothLe: BluetoothLe) { }
+ * constructor(private ble: BluetoothLe) { }
  *
  * ...
  *
  *
- * this.bluetoothLe.functionName('Hello', 123)
- *   .then((res: any) => console.log(res))
- *   .catch((error: any) => console.error(error));
+ * this.ble.initialize().take(1).subscribe(result => {
+ *   console.log(`bluetooth status: ${result.status}`)
+ * })
  *
  * ```
  */
