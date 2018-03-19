@@ -322,7 +322,7 @@ export class BluetoothLe extends IonicNativePlugin {
    * @param params CharacteristicPath
    */
   @Cordova({ callbackOrder: 'reverse', observable: true })
-  subscribe(params: CharacteristicPath): Observable<{ status: 'subscribed' | 'subscribedResult', value: string }> {
+  subscribe(params: CharacteristicPath): Observable<{ status: 'subscribed' | 'subscribedResult', value?: string }> {
     return
   }
 
