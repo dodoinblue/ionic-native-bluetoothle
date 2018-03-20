@@ -23,6 +23,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Injectable } from '@angular/core';
 import { Plugin, Cordova, CordovaProperty, IonicNativePlugin } from '@ionic-native/core';
 import { Observable } from 'rxjs/Observable';
+import './mocks/BluetoothLeMock';
 /**
  * @name BluetoothLe
  * @description

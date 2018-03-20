@@ -1,7 +1,7 @@
 import { IonicNativePlugin } from '@ionic-native/core';
 import { Observable } from 'rxjs/Observable';
 import { InitParams, ScanParams, RetrieveConnectedParams, AddressParams, ConnectParams, DiscoverParams, ServicesDiscoverParams, CharacteristicsDiscoverParams, CharacteristicPath } from './models/BlePluginParams';
-import { BluetoothLeMock as Mock } from './mocks/BluetoothLeMock';
+import './mocks/BluetoothLeMock';
 /**
  * @name BluetoothLe
  * @description
@@ -357,4 +357,3 @@ export declare class BluetoothLe extends IonicNativePlugin {
     bytesToEncodedString(bytes: Uint8Array): string;
     encodedStringToBytes(s: string): Uint8Array;
 }
-export declare type BluetoothLeMock = Mock;
