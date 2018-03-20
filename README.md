@@ -66,10 +66,42 @@ export class MyComponent {
 
 ### Mocking and Browser Development
 
-TBD
+Basic mocking for development in browser is provided. To use the basic mocking class, first import both real and mock class in your `src/app/app.module.ts` file
+
+```typescript
+import { BluetoothLe, BluetoothLeMock } from 'ionic-native-bluetoothle';
+```
+
+And override previous `BluetoothLe` class in `providers` section in `src/app/app.module.ts`
+```typescript
+providers: [
+  { provide: BluetoothLe, useClass: BluetoothLeMock }
+]
+```
+
+If you'd like to modify the Mock behavior, extend it to your own class, and replace `BluetoothLeMock` in the previous steps with your class. Example:
+
+```typescript
+// YourBleMock.ts
+import { BluetoothLeMock } from 'ionic-native-bluetoothle';
+
+export class YourBleMock extends BluetoothLeMock {
+
+}
+
+// app.module.ts
+import { BluetoothLe } from 'ionic-native-bluetoothle';
+import { YourBleMock } from 'path/to/YourBleMock.ts';
+
+...
+
+providers: [
+  { provide: BluetoothLe, useClass: YourBleMock }
+]
+```
 
 # Credits
 
 This plugin is based on:
-https://github.com/randdusing/cordova-plugin-bluetoothle
-https://github.com/ionic-team/ionic-native
+* https://github.com/randdusing/cordova-plugin-bluetoothle
+* https://github.com/ionic-team/ionic-native
