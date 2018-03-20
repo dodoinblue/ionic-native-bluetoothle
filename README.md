@@ -69,7 +69,8 @@ export class MyComponent {
 Basic mocking for development in browser is provided. To use the basic mocking class, first import both real and mock class in your `src/app/app.module.ts` file
 
 ```typescript
-import { BluetoothLe, BluetoothLeMock } from 'ionic-native-bluetoothle';
+import { BluetoothLe } from 'ionic-native-bluetoothle';
+import { BluetoothLeMock } from 'ionic-native-bluetoothle/mocks/BluetoothLeMock';
 ```
 
 And override previous `BluetoothLe` class in `providers` section in `src/app/app.module.ts`
@@ -83,7 +84,7 @@ If you'd like to modify the Mock behavior, extend it to your own class, and repl
 
 ```typescript
 // YourBleMock.ts
-import { BluetoothLeMock } from 'ionic-native-bluetoothle';
+import { BluetoothLeMock } from 'ionic-native-bluetoothle/mocks/BluetoothLeMock';
 
 export class YourBleMock extends BluetoothLeMock {
 

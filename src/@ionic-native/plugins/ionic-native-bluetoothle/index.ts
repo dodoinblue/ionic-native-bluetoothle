@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
 import { Plugin, Cordova, CordovaProperty, IonicNativePlugin } from '@ionic-native/core';
 import { Observable } from 'rxjs/Observable';
 import { InitParams, ScanParams, RetrieveConnectedParams, AddressParams, ConnectParams, DiscoverParams, ServicesDiscoverParams, CharacteristicsDiscoverParams, CharacteristicPath } from './models/BlePluginParams'
-import { BluetoothLeMock as Mock } from './mocks/BluetoothLeMock'
+import './mocks/BluetoothLeMock'
+
 /**
  * @name BluetoothLe
  * @description
@@ -498,5 +499,3 @@ export class BluetoothLe extends IonicNativePlugin {
     return
   }
 }
-
-export type BluetoothLeMock = Mock
