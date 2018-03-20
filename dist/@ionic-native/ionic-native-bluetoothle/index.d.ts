@@ -1,6 +1,7 @@
 import { IonicNativePlugin } from '@ionic-native/core';
 import { Observable } from 'rxjs/Observable';
 import { InitParams, ScanParams, RetrieveConnectedParams, AddressParams, ConnectParams, DiscoverParams, ServicesDiscoverParams, CharacteristicsDiscoverParams, CharacteristicPath } from './models/BlePluginParams';
+import { BluetoothLeMock as Mock } from './mocks/BluetoothLeMock';
 /**
  * @name BluetoothLe
  * @description
@@ -234,7 +235,7 @@ export declare class BluetoothLe extends IonicNativePlugin {
      */
     subscribe(params: CharacteristicPath): Observable<{
         status: 'subscribed' | 'subscribedResult';
-        value: string;
+        value?: string;
     }>;
     /**
      * Unsubscribe to a particular service's characteristic.
@@ -356,3 +357,4 @@ export declare class BluetoothLe extends IonicNativePlugin {
     bytesToEncodedString(bytes: Uint8Array): string;
     encodedStringToBytes(s: string): Uint8Array;
 }
+export declare type BluetoothLeMock = Mock;
