@@ -1,11 +1,11 @@
-import { BluetoothLe } from '../index';
+import { BluetoothLe } from '../BluetoothLe';
 import { Observable } from 'rxjs/Observable';
-import { InitParams, ScanParams, RetrieveConnectedParams, AddressParams, ConnectParams, DiscoverParams, ServicesDiscoverParams, CharacteristicsDiscoverParams, CharacteristicPath } from '../models/BlePluginParams';
+import * as BlePluginParams from '../models/BlePluginParams';
 import { Observer } from 'rxjs/Observer';
 export declare class BluetoothLeMock extends BluetoothLe {
     initObserver: Observer<any>;
     connectObserver: Observer<any>;
-    initialize(params?: InitParams): Observable<{
+    initialize(params?: BlePluginParams.InitParams): Observable<{
         status: 'enabled' | 'disabled';
         message?: string;
     }>;
@@ -19,7 +19,7 @@ export declare class BluetoothLeMock extends BluetoothLe {
         isScanning: boolean;
         isDiscoverable: boolean;
     }>;
-    startScan(params?: ScanParams): Observable<{
+    startScan(params?: BlePluginParams.ScanParams): Observable<{
         status: 'scanResult' | 'scanStarted';
         advertisement?: string | any;
         rssi?: number;
@@ -29,41 +29,41 @@ export declare class BluetoothLeMock extends BluetoothLe {
     stopScan(): Promise<{
         status: 'scanStopped';
     }>;
-    retrieveConnected(params?: RetrieveConnectedParams): Promise<Array<{
+    retrieveConnected(params?: BlePluginParams.RetrieveConnectedParams): Promise<Array<{
         name: string;
         address: string;
     }>>;
-    bond(params?: AddressParams): Observable<{
+    bond(params?: BlePluginParams.AddressParams): Observable<{
         name: string;
         address: string;
         status: 'bonded' | 'bonding' | 'unbonded';
     }>;
-    unbond(params?: AddressParams): Observable<{
+    unbond(params?: BlePluginParams.AddressParams): Observable<{
         name: string;
         address: string;
         status: 'unbonded';
     }>;
-    connect(params: ConnectParams): Observable<{
+    connect(params: BlePluginParams.ConnectParams): Observable<{
         name: string;
         address: string;
         status: 'connected' | 'disconnected';
     }>;
-    reconnect(params: AddressParams): Promise<{
+    reconnect(params: BlePluginParams.AddressParams): Promise<{
         name: string;
         address: string;
         status: 'connected' | 'disconnected';
     }>;
-    disconnect(params: AddressParams): Promise<{
+    disconnect(params: BlePluginParams.AddressParams): Promise<{
         address: string;
         name: string;
         status: 'disconnected';
     }>;
-    close(params: AddressParams): Promise<{
+    close(params: BlePluginParams.AddressParams): Promise<{
         address: string;
         name: string;
         status: 'closed';
     }>;
-    discover(params: DiscoverParams): Promise<{
+    discover(params: BlePluginParams.DiscoverParams): Promise<{
         status: string;
         address: string;
         name: string;
@@ -75,35 +75,35 @@ export declare class BluetoothLeMock extends BluetoothLe {
             }[];
         }[];
     }>;
-    services(params: ServicesDiscoverParams): Promise<{
+    services(params: BlePluginParams.ServicesDiscoverParams): Promise<{
         status: 'services';
         services: string[];
         name: string;
         address: string;
     }>;
-    characteristics(params: CharacteristicsDiscoverParams): Promise<any>;
+    characteristics(params: BlePluginParams.CharacteristicsDiscoverParams): Promise<any>;
     descriptors(params: {
         address: string;
         service: string;
         characteristic: string;
     }): Promise<any>;
-    read(params: CharacteristicPath): Promise<{
+    read(params: BlePluginParams.CharacteristicPath): Promise<{
         value: string;
         name: string;
         status: 'read';
-    } & CharacteristicPath>;
-    subscribe(params: CharacteristicPath): Observable<any>;
-    unsubscribe(params: CharacteristicPath): Promise<{
+    } & BlePluginParams.CharacteristicPath>;
+    subscribe(params: BlePluginParams.CharacteristicPath): Observable<any>;
+    unsubscribe(params: BlePluginParams.CharacteristicPath): Promise<{
         status: 'unsubscribed';
         name: string;
-    } & CharacteristicPath>;
+    } & BlePluginParams.CharacteristicPath>;
     write(params: ({
         value: string;
         type?: 'noResponse';
-    } & CharacteristicPath)): Promise<{
+    } & BlePluginParams.CharacteristicPath)): Promise<{
         status: 'written';
         value?: string;
-    } & CharacteristicPath> | void;
+    } & BlePluginParams.CharacteristicPath> | void;
     isInitialized(): Promise<{
         isInitialized: boolean;
     }>;
@@ -113,16 +113,16 @@ export declare class BluetoothLeMock extends BluetoothLe {
     isScanning(): Promise<{
         isScanning: boolean;
     }>;
-    isBonded(params: AddressParams): Promise<{
+    isBonded(params: BlePluginParams.AddressParams): Promise<{
         isBonded: boolean;
     }>;
-    wasConnected(params: AddressParams): Promise<{
+    wasConnected(params: BlePluginParams.AddressParams): Promise<{
         wasConnected: boolean;
     }>;
-    isConnected(params: AddressParams): Promise<{
+    isConnected(params: BlePluginParams.AddressParams): Promise<{
         isConnected: boolean;
     }>;
-    isDiscovered(params: AddressParams): Promise<{
+    isDiscovered(params: BlePluginParams.AddressParams): Promise<{
         isDiscovered: boolean;
     }>;
 }

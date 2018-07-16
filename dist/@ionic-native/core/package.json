@@ -1,13 +1,14 @@
 {
   "name": "@ionic-native/core",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Ionic Native - Native plugins for ionic apps",
   "module": "index.js",
   "typings": "index.d.ts",
   "author": "ionic",
   "license": "MIT",
   "peerDependencies": {
-    "rxjs": "^5.0.1"
+    "rxjs": "^5.0.1",
+    "@dodoinblue/promiseutils": "^0.1.0"
   },
   "repository": {
     "type": "git",

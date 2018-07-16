@@ -8,79 +8,12 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { BluetoothLe } from '../index';
+import { BluetoothLe } from '../BluetoothLe';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { interval } from 'rxjs/observable/interval';
 import { map } from 'rxjs/operators';
-// creating temporary enums to avoid ts compiler warning.
-// https://github.com/Microsoft/TypeScript/issues/10570
-var InitStatus;
-(function (InitStatus) {
-    InitStatus["enable"] = "enabled";
-    InitStatus["disable"] = "disabled";
-})(InitStatus || (InitStatus = {}));
-var StartScanStatus;
-(function (StartScanStatus) {
-    StartScanStatus["start"] = "scanStarted";
-    StartScanStatus["result"] = "scanResult";
-})(StartScanStatus || (StartScanStatus = {}));
-var StopScanStatus;
-(function (StopScanStatus) {
-    StopScanStatus["stop"] = "scanStopped";
-})(StopScanStatus || (StopScanStatus = {}));
-var BondStatus;
-(function (BondStatus) {
-    BondStatus["bonded"] = "bonded";
-    BondStatus["bonding"] = "bonding";
-    BondStatus["unbonded"] = "unbonded";
-})(BondStatus || (BondStatus = {}));
-var UnbondStatus;
-(function (UnbondStatus) {
-    UnbondStatus["unbonded"] = "unbonded";
-})(UnbondStatus || (UnbondStatus = {}));
-var ConnectStatus;
-(function (ConnectStatus) {
-    ConnectStatus["connected"] = "connected";
-    ConnectStatus["disconnected"] = "disconnected";
-})(ConnectStatus || (ConnectStatus = {}));
-var DisconnectStatus;
-(function (DisconnectStatus) {
-    DisconnectStatus["disconnected"] = "disconnected";
-})(DisconnectStatus || (DisconnectStatus = {}));
-var CloseStatus;
-(function (CloseStatus) {
-    CloseStatus["closed"] = "closed";
-})(CloseStatus || (CloseStatus = {}));
-var ServiceStatus;
-(function (ServiceStatus) {
-    ServiceStatus["services"] = "services";
-})(ServiceStatus || (ServiceStatus = {}));
-var CharacteristicsStatus;
-(function (CharacteristicsStatus) {
-    CharacteristicsStatus["characteristics"] = "characteristics";
-})(CharacteristicsStatus || (CharacteristicsStatus = {}));
-var DescriptorsStatus;
-(function (DescriptorsStatus) {
-    DescriptorsStatus["descriptors"] = "descriptors";
-})(DescriptorsStatus || (DescriptorsStatus = {}));
-var ReadStatus;
-(function (ReadStatus) {
-    ReadStatus["read"] = "read";
-})(ReadStatus || (ReadStatus = {}));
-var SubscribeStatus;
-(function (SubscribeStatus) {
-    SubscribeStatus["subscribed"] = "subscribed";
-    SubscribeStatus["result"] = "subscribedResult";
-})(SubscribeStatus || (SubscribeStatus = {}));
-var UnsubscribeStatus;
-(function (UnsubscribeStatus) {
-    UnsubscribeStatus["unsubscribed"] = "unsubscribed";
-})(UnsubscribeStatus || (UnsubscribeStatus = {}));
-var WriteStatus;
-(function (WriteStatus) {
-    WriteStatus["written"] = "written";
-})(WriteStatus || (WriteStatus = {}));
+import * as BlePluginParams from '../models/BlePluginParams';
 var BluetoothLeMock = (function (_super) {
     __extends(BluetoothLeMock, _super);
     function BluetoothLeMock() {
@@ -89,17 +22,17 @@ var BluetoothLeMock = (function (_super) {
     BluetoothLeMock.prototype.initialize = function (params) {
         return Observable.create(function (observer) {
             this.initObserver = observer;
-            this.initObserver.next({ status: InitStatus.enable });
+            this.initObserver.next({ status: BlePluginParams.InitStatus.enable });
         });
     };
     BluetoothLeMock.prototype.enable = function () {
         if (this.initObserver) {
-            this.initObserver.next({ status: InitStatus.enable });
+            this.initObserver.next({ status: BlePluginParams.InitStatus.enable });
         }
     };
     BluetoothLeMock.prototype.disable = function () {
         if (this.initObserver) {
-            this.initObserver.next({ status: InitStatus.disable });
+            this.initObserver.next({ status: BlePluginParams.InitStatus.disable });
         }
     };
     BluetoothLeMock.prototype.getAdapterInfo = function () {
@@ -114,33 +47,33 @@ var BluetoothLeMock = (function (_super) {
     };
     BluetoothLeMock.prototype.startScan = function (params) {
         var resp = [
-            { status: StartScanStatus.start },
+            { status: BlePluginParams.StartScanStatus.start },
             {
                 'address': 'C6:D5:E9:DF:CE:EE',
                 'name': 'SLICE-041Q',
                 'rssi': -80,
                 'advertisement': 'AgEEDv+JATYwUDAwMDQxUUFJCwlTTElDRS0wNDFRAwINGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
-                'status': StartScanStatus.result
+                'status': BlePluginParams.StartScanStatus.result
             },
             {
                 'address': '2A:12:AA:D3:D2:C5',
                 'name': null,
                 'rssi': -92,
                 'advertisement': 'AgEbC/9MAAkGAxusGRmSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
-                'status': StartScanStatus.result
+                'status': BlePluginParams.StartScanStatus.result
             },
             {
                 'address': 'E7:85:C7:2D:F8:AF',
                 'name': 'SLICE-16LQ',
                 'rssi': -89, 'advertisement': 'AgEEDv+JATYwUDAwMTZMUUxICwlTTElDRS0xNkxRAwINGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
-                'status': StartScanStatus.result
+                'status': BlePluginParams.StartScanStatus.result
             },
             {
                 'address': 'C6:D7:C9:0F:72:52',
                 'name': 'LINK2-SJR2',
                 'rssi': -78,
                 'advertisement': 'AgEED/+JATYxUEo2U0pSMklIBQsJTElOSzItU0pSMgMCDRgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
-                'status': StartScanStatus.result
+                'status': BlePluginParams.StartScanStatus.result
             }
         ];
         return interval(1000).pipe(map(function (val) {
@@ -151,7 +84,7 @@ var BluetoothLeMock = (function (_super) {
     };
     BluetoothLeMock.prototype.stopScan = function () {
         return Promise.resolve({
-            status: StopScanStatus.stop
+            status: BlePluginParams.StopScanStatus.stop
         });
     };
     BluetoothLeMock.prototype.retrieveConnected = function (params) {
@@ -168,8 +101,8 @@ var BluetoothLeMock = (function (_super) {
     };
     BluetoothLeMock.prototype.bond = function (params) {
         var resp = [
-            { name: 'Mock-Dev0', address: params.address, status: BondStatus.bonding },
-            { name: 'Mock-Dev0', address: params.address, status: BondStatus.bonded }
+            { name: 'Mock-Dev0', address: params.address, status: BlePluginParams.BondStatus.bonding },
+            { name: 'Mock-Dev0', address: params.address, status: BlePluginParams.BondStatus.bonded }
         ];
         return interval(2000).pipe(map(function (val) {
             if (val < resp.length) {
@@ -181,7 +114,7 @@ var BluetoothLeMock = (function (_super) {
         return of({
             name: 'Mock-Dev0',
             address: params.address,
-            status: UnbondStatus.unbonded
+            status: BlePluginParams.UnbondStatus.unbonded
         });
     };
     BluetoothLeMock.prototype.connect = function (params) {
@@ -190,7 +123,7 @@ var BluetoothLeMock = (function (_super) {
             this.connectObserver.next({
                 name: 'MOCK-Dev0',
                 address: params.address,
-                status: ConnectStatus.connected
+                status: BlePluginParams.ConnectStatus.connected
             });
         });
     };
@@ -199,13 +132,13 @@ var BluetoothLeMock = (function (_super) {
             this.connectObserver.next({
                 name: 'MOCK-Dev0',
                 address: params.address,
-                status: ConnectStatus.connected
+                status: BlePluginParams.ConnectStatus.connected
             });
         }
         return Promise.resolve({
             name: 'MOCK-Dev0',
             address: params.address,
-            status: ConnectStatus.connected
+            status: BlePluginParams.ConnectStatus.connected
         });
     };
     BluetoothLeMock.prototype.disconnect = function (params) {
@@ -213,20 +146,20 @@ var BluetoothLeMock = (function (_super) {
             this.connectObserver.next({
                 name: 'MOCK-Dev0',
                 address: params.address,
-                status: DisconnectStatus.disconnected
+                status: BlePluginParams.DisconnectStatus.disconnected
             });
         }
         return Promise.resolve({
             name: 'MOCK-Dev0',
             address: params.address,
-            status: DisconnectStatus.disconnected
+            status: BlePluginParams.DisconnectStatus.disconnected
         });
     };
     BluetoothLeMock.prototype.close = function (params) {
         return Promise.resolve({
             name: 'MOCK-Dev0',
             address: params.address,
-            status: CloseStatus.closed
+            status: BlePluginParams.CloseStatus.closed
         });
     };
     BluetoothLeMock.prototype.discover = function (params) {
@@ -411,7 +344,7 @@ var BluetoothLeMock = (function (_super) {
     };
     BluetoothLeMock.prototype.services = function (params) {
         return Promise.resolve({
-            'status': ServiceStatus.services,
+            'status': BlePluginParams.ServiceStatus.services,
             'services': [
                 '180d',
                 '180a',
@@ -424,7 +357,7 @@ var BluetoothLeMock = (function (_super) {
     };
     BluetoothLeMock.prototype.characteristics = function (params) {
         return Promise.resolve({
-            'status': CharacteristicsStatus.characteristics,
+            'status': BlePluginParams.CharacteristicsStatus.characteristics,
             'characteristics': [
                 {
                     'properties': {
@@ -446,7 +379,7 @@ var BluetoothLeMock = (function (_super) {
     };
     BluetoothLeMock.prototype.descriptors = function (params) {
         return Promise.resolve({
-            'status': DescriptorsStatus.descriptors,
+            'status': BlePluginParams.DescriptorsStatus.descriptors,
             'descriptors': [
                 '2902'
             ],
@@ -463,20 +396,20 @@ var BluetoothLeMock = (function (_super) {
             characteristic: params.characteristic,
             value: '',
             name: 'MOCK-Dev0',
-            status: ReadStatus.read
+            status: BlePluginParams.ReadStatus.read
         });
     };
     BluetoothLeMock.prototype.subscribe = function (params) {
         var resp = [
             {
-                'status': SubscribeStatus.subscribed,
+                'status': BlePluginParams.SubscribeStatus.subscribed,
                 'characteristic': params.characteristic,
                 'name': 'Mock-Dev0',
                 'service': params.service,
                 'address': params.address
             },
             {
-                'status': SubscribeStatus.result,
+                'status': BlePluginParams.SubscribeStatus.result,
                 'value': 'U3Vic2NyaWJlIEhlbGxvIFdvcmxk',
                 'characteristic': params.characteristic,
                 'name': 'Mock-Dev0',
@@ -492,7 +425,7 @@ var BluetoothLeMock = (function (_super) {
     };
     BluetoothLeMock.prototype.unsubscribe = function (params) {
         return Promise.resolve({
-            'status': UnsubscribeStatus.unsubscribed,
+            'status': BlePluginParams.UnsubscribeStatus.unsubscribed,
             'characteristic': params.characteristic,
             'name': 'Mock-Dev0',
             'service': params.service,
@@ -501,7 +434,7 @@ var BluetoothLeMock = (function (_super) {
     };
     BluetoothLeMock.prototype.write = function (params) {
         return Promise.resolve({
-            'status': WriteStatus.written,
+            'status': BlePluginParams.WriteStatus.written,
             'service': params.service,
             'characteristic': params.characteristic,
             'value': 'V3JpdGUgSGVsbG8gV29ybGQ=',

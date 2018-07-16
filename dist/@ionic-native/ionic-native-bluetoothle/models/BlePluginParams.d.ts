@@ -38,3 +38,54 @@ export interface CharacteristicPath {
     service: string;
     characteristic: string;
 }
+export declare enum InitStatus {
+    enable = "enabled",
+    disable = "disabled",
+}
+export declare enum StartScanStatus {
+    start = "scanStarted",
+    result = "scanResult",
+}
+export declare enum StopScanStatus {
+    stop = "scanStopped",
+}
+export declare enum BondStatus {
+    bonded = "bonded",
+    bonding = "bonding",
+    unbonded = "unbonded",
+}
+export declare enum UnbondStatus {
+    unbonded = "unbonded",
+}
+export declare enum ConnectStatus {
+    connected = "connected",
+    disconnected = "disconnected",
+}
+export declare enum DisconnectStatus {
+    disconnected = "disconnected",
+}
+export declare enum CloseStatus {
+    closed = "closed",
+}
+export declare enum ServiceStatus {
+    services = "services",
+}
+export declare enum CharacteristicsStatus {
+    characteristics = "characteristics",
+}
+export declare enum DescriptorsStatus {
+    descriptors = "descriptors",
+}
+export declare enum ReadStatus {
+    read = "read",
+}
+export declare enum SubscribeStatus {
+    subscribed = "subscribed",
+    result = "subscribedResult",
+}
+export declare enum UnsubscribeStatus {
+    unsubscribed = "unsubscribed",
+}
+export declare enum WriteStatus {
+    written = "written",
+}
