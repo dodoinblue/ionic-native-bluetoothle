@@ -1,6 +1,6 @@
 {
   "name": "bluetoothle",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Native plugin wrappers for randdusing/cordova-plugin-bluetoothle",
   "author": "Charles Liu <dodoinblue@gmail.com>",
   "license": "MIT",
@@ -9,7 +9,8 @@
   "peerDependencies": {
     "@ionic-native/core": "^4.2.0",
     "@angular/core": "*",
-    "rxjs": "^5.0.1"
+    "rxjs": "^5.0.1",
+    "@dodoinblue/promiseutils": "^0.1.0"
   },
   "devDependencies": {
     "@angular/compiler": "4.4.4",

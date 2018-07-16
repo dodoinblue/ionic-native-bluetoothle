@@ -1,103 +1,35 @@
-import { BluetoothLe } from '../index'
+import { BluetoothLe } from '../BluetoothLe'
 import { Observable } from 'rxjs/Observable'
 import { of } from 'rxjs/observable/of'
 import { interval } from 'rxjs/observable/interval'
 import { map } from 'rxjs/operators'
-import { InitParams, ScanParams, RetrieveConnectedParams, AddressParams, ConnectParams, DiscoverParams, ServicesDiscoverParams, CharacteristicsDiscoverParams, CharacteristicPath } from '../models/BlePluginParams'
+import * as BlePluginParams from '../models/BlePluginParams'
 import { Observer } from 'rxjs/Observer';
-
-// creating temporary enums to avoid ts compiler warning.
-// https://github.com/Microsoft/TypeScript/issues/10570
-enum InitStatus {
-  enable = 'enabled',
-  disable = 'disabled'
-}
-
-enum StartScanStatus {
-  start = 'scanStarted',
-  result = 'scanResult'
-}
-
-enum StopScanStatus {
-  stop = 'scanStopped'
-}
-
-enum BondStatus {
-  bonded = 'bonded',
-  bonding = 'bonding',
-  unbonded = 'unbonded'
-}
-
-enum UnbondStatus {
-  unbonded = 'unbonded'
-}
-
-enum ConnectStatus {
-  connected = 'connected',
-  disconnected = 'disconnected'
-}
-
-enum DisconnectStatus {
-  disconnected = 'disconnected'
-}
-
-enum CloseStatus {
-  closed = 'closed'
-}
-
-enum ServiceStatus {
-  services = 'services'
-}
-
-enum CharacteristicsStatus {
-  characteristics = 'characteristics'
-}
-
-enum DescriptorsStatus {
-  descriptors = 'descriptors'
-}
-
-enum ReadStatus {
-  read = 'read'
-}
-
-enum SubscribeStatus {
-  subscribed = 'subscribed',
-  result = 'subscribedResult'
-}
-
-enum UnsubscribeStatus {
-  unsubscribed = 'unsubscribed',
-}
-
-enum WriteStatus {
-  written = 'written'
-}
 
 export class BluetoothLeMock extends BluetoothLe {
 
   initObserver: Observer<any>
   connectObserver: Observer<any>
 
-  initialize(params?: InitParams): Observable<{
+  initialize(params?: BlePluginParams.InitParams): Observable<{
     status: 'enabled' | 'disabled';
     message?: string;
   }> {
     return Observable.create(function (observer: Observer<any>) {
       this.initObserver = observer
-      this.initObserver.next({ status: InitStatus.enable })
+      this.initObserver.next({ status: BlePluginParams.InitStatus.enable })
     });
   }
 
   enable() {
     if (this.initObserver) {
-      this.initObserver.next({ status: InitStatus.enable })
+      this.initObserver.next({ status: BlePluginParams.InitStatus.enable })
     }
   }
 
   disable() {
     if (this.initObserver) {
-      this.initObserver.next({ status: InitStatus.disable })
+      this.initObserver.next({ status: BlePluginParams.InitStatus.disable })
     }
   }
 
@@ -119,7 +51,7 @@ export class BluetoothLeMock extends BluetoothLe {
     })
   }
 
-  startScan(params?: ScanParams): Observable<{
+  startScan(params?: BlePluginParams.ScanParams): Observable<{
     status: 'scanResult' | 'scanStarted';
     advertisement?: string | any;
     rssi?: number;
@@ -127,33 +59,33 @@ export class BluetoothLeMock extends BluetoothLe {
     address?: string;
   }> {
     let resp = [
-      { status: StartScanStatus.start },
+      { status: BlePluginParams.StartScanStatus.start },
       {
         'address': 'C6:D5:E9:DF:CE:EE',
         'name': 'SLICE-041Q',
         'rssi': -80,
         'advertisement': 'AgEEDv+JATYwUDAwMDQxUUFJCwlTTElDRS0wNDFRAwINGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
-        'status': StartScanStatus.result
+        'status': BlePluginParams.StartScanStatus.result
       },
       {
         'address': '2A:12:AA:D3:D2:C5',
         'name': null,
         'rssi': -92,
         'advertisement': 'AgEbC/9MAAkGAxusGRmSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
-        'status': StartScanStatus.result
+        'status': BlePluginParams.StartScanStatus.result
       },
       {
         'address': 'E7:85:C7:2D:F8:AF',
         'name': 'SLICE-16LQ',
         'rssi': -89, 'advertisement': 'AgEEDv+JATYwUDAwMTZMUUxICwlTTElDRS0xNkxRAwINGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
-        'status': StartScanStatus.result
+        'status': BlePluginParams.StartScanStatus.result
       },
       {
         'address': 'C6:D7:C9:0F:72:52',
         'name': 'LINK2-SJR2',
         'rssi': -78,
         'advertisement': 'AgEED/+JATYxUEo2U0pSMklIBQsJTElOSzItU0pSMgMCDRgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
-        'status': StartScanStatus.result
+        'status': BlePluginParams.StartScanStatus.result
       }
     ]
     return interval(1000).pipe(map(val => {
@@ -167,11 +99,11 @@ export class BluetoothLeMock extends BluetoothLe {
     status: 'scanStopped';
   }> {
     return Promise.resolve({
-      status: StopScanStatus.stop
+      status: BlePluginParams.StopScanStatus.stop
     })
   }
 
-  retrieveConnected(params?: RetrieveConnectedParams): Promise<Array<{
+  retrieveConnected(params?: BlePluginParams.RetrieveConnectedParams): Promise<Array<{
     name: string;
     address: string;
   }>> {
@@ -187,14 +119,14 @@ export class BluetoothLeMock extends BluetoothLe {
     ])
   }
 
-  bond(params?: AddressParams): Observable<{
+  bond(params?: BlePluginParams.AddressParams): Observable<{
     name: string;
     address: string;
     status: 'bonded' | 'bonding' | 'unbonded';
   }> {
     let resp = [
-      { name: 'Mock-Dev0', address: params.address, status: BondStatus.bonding },
-      { name: 'Mock-Dev0', address: params.address, status: BondStatus.bonded }
+      { name: 'Mock-Dev0', address: params.address, status: BlePluginParams.BondStatus.bonding },
+      { name: 'Mock-Dev0', address: params.address, status: BlePluginParams.BondStatus.bonded }
     ]
     return interval(2000).pipe(map(val => {
       if (val < resp.length) {
@@ -203,7 +135,7 @@ export class BluetoothLeMock extends BluetoothLe {
     }))
   }
 
-  unbond(params?: AddressParams): Observable<{
+  unbond(params?: BlePluginParams.AddressParams): Observable<{
     name: string;
     address: string;
     status: 'unbonded';
@@ -211,11 +143,11 @@ export class BluetoothLeMock extends BluetoothLe {
     return of({
       name: 'Mock-Dev0',
       address: params.address,
-      status: UnbondStatus.unbonded
+      status: BlePluginParams.UnbondStatus.unbonded
     })
   }
 
-  connect(params: ConnectParams): Observable<{
+  connect(params: BlePluginParams.ConnectParams): Observable<{
     name: string;
     address: string;
     status: 'connected' | 'disconnected';
@@ -225,12 +157,12 @@ export class BluetoothLeMock extends BluetoothLe {
       this.connectObserver.next({
         name: 'MOCK-Dev0',
         address: params.address,
-        status: ConnectStatus.connected
+        status: BlePluginParams.ConnectStatus.connected
       })
     })
   }
 
-  reconnect(params: AddressParams): Promise<{
+  reconnect(params: BlePluginParams.AddressParams): Promise<{
     name: string;
     address: string;
     status: 'connected' | 'disconnected';
@@ -239,17 +171,17 @@ export class BluetoothLeMock extends BluetoothLe {
       this.connectObserver.next({
         name: 'MOCK-Dev0',
         address: params.address,
-        status: ConnectStatus.connected
+        status: BlePluginParams.ConnectStatus.connected
       })
     }
     return Promise.resolve({
       name: 'MOCK-Dev0',
       address: params.address,
-      status: ConnectStatus.connected
+      status: BlePluginParams.ConnectStatus.connected
     })
   }
 
-  disconnect(params: AddressParams): Promise<{
+  disconnect(params: BlePluginParams.AddressParams): Promise<{
     address: string;
     name: string;
     status: 'disconnected';
@@ -258,17 +190,17 @@ export class BluetoothLeMock extends BluetoothLe {
       this.connectObserver.next({
         name: 'MOCK-Dev0',
         address: params.address,
-        status: DisconnectStatus.disconnected
+        status: BlePluginParams.DisconnectStatus.disconnected
       })
     }
     return Promise.resolve({
       name: 'MOCK-Dev0',
       address: params.address,
-      status: DisconnectStatus.disconnected
+      status: BlePluginParams.DisconnectStatus.disconnected
     })
   }
 
-  close(params: AddressParams): Promise<{
+  close(params: BlePluginParams.AddressParams): Promise<{
     address: string;
     name: string;
     status: 'closed';
@@ -276,11 +208,11 @@ export class BluetoothLeMock extends BluetoothLe {
     return Promise.resolve({
       name: 'MOCK-Dev0',
       address: params.address,
-      status: CloseStatus.closed
+      status: BlePluginParams.CloseStatus.closed
     })
   }
 
-  discover(params: DiscoverParams): Promise<{
+  discover(params: BlePluginParams.DiscoverParams): Promise<{
     status: string;
     address: string;
     name: string;
@@ -502,14 +434,14 @@ export class BluetoothLeMock extends BluetoothLe {
     })
   }
 
-  services(params: ServicesDiscoverParams): Promise<{
+  services(params: BlePluginParams.ServicesDiscoverParams): Promise<{
     status: 'services';
     services: string[];
     name: string;
     address: string;
   }> {
     return Promise.resolve({
-      'status': ServiceStatus.services,
+      'status': BlePluginParams.ServiceStatus.services,
       'services': [
         '180d',
         '180a',
@@ -521,9 +453,9 @@ export class BluetoothLeMock extends BluetoothLe {
     })
   }
 
-  characteristics(params: CharacteristicsDiscoverParams): Promise<any> {
+  characteristics(params: BlePluginParams.CharacteristicsDiscoverParams): Promise<any> {
     return Promise.resolve({
-      'status': CharacteristicsStatus.characteristics,
+      'status': BlePluginParams.CharacteristicsStatus.characteristics,
       'characteristics': [
         {
           'properties': {
@@ -550,7 +482,7 @@ export class BluetoothLeMock extends BluetoothLe {
     characteristic: string;
   }): Promise<any> {
     return Promise.resolve({
-      'status': DescriptorsStatus.descriptors,
+      'status': BlePluginParams.DescriptorsStatus.descriptors,
       'descriptors': [
         '2902'
       ],
@@ -561,32 +493,32 @@ export class BluetoothLeMock extends BluetoothLe {
     })
   }
 
-  read(params: CharacteristicPath): Promise<{
+  read(params: BlePluginParams.CharacteristicPath): Promise<{
     value: string;
     name: string;
     status: 'read';
-  } & CharacteristicPath> {
+  } & BlePluginParams.CharacteristicPath> {
     return Promise.resolve({
       address: params.address,
       service: params.service,
       characteristic: params.characteristic,
       value: '',
       name: 'MOCK-Dev0',
-      status: ReadStatus.read
+      status: BlePluginParams.ReadStatus.read
     })
   }
 
-  subscribe(params: CharacteristicPath): Observable<any> {
+  subscribe(params: BlePluginParams.CharacteristicPath): Observable<any> {
     let resp = [
       {
-        'status': SubscribeStatus.subscribed,
+        'status': BlePluginParams.SubscribeStatus.subscribed,
         'characteristic': params.characteristic,
         'name': 'Mock-Dev0',
         'service': params.service,
         'address': params.address
       },
       {
-        'status': SubscribeStatus.result,
+        'status': BlePluginParams.SubscribeStatus.result,
         'value': 'U3Vic2NyaWJlIEhlbGxvIFdvcmxk', // Subscribe Hello World
         'characteristic': params.characteristic,
         'name': 'Mock-Dev0',
@@ -601,12 +533,12 @@ export class BluetoothLeMock extends BluetoothLe {
     }))
   }
 
-  unsubscribe(params: CharacteristicPath): Promise<{
+  unsubscribe(params: BlePluginParams.CharacteristicPath): Promise<{
     status: 'unsubscribed';
     name: string;
-  } & CharacteristicPath> {
+  } & BlePluginParams.CharacteristicPath> {
     return Promise.resolve({
-      'status': UnsubscribeStatus.unsubscribed,
+      'status': BlePluginParams.UnsubscribeStatus.unsubscribed,
       'characteristic': params.characteristic,
       'name': 'Mock-Dev0',
       'service': params.service,
@@ -617,12 +549,12 @@ export class BluetoothLeMock extends BluetoothLe {
   write(params: ({
     value: string;
     type?: 'noResponse';
-  } & CharacteristicPath)): Promise<{
+  } & BlePluginParams.CharacteristicPath)): Promise<{
     status: 'written';
     value?: string;
-  } & CharacteristicPath> | void {
+  } & BlePluginParams.CharacteristicPath> | void {
     return Promise.resolve({
-      'status': WriteStatus.written,
+      'status': BlePluginParams.WriteStatus.written,
       'service': params.service,
       'characteristic': params.characteristic,
       'value': 'V3JpdGUgSGVsbG8gV29ybGQ=', // Write Hello World
@@ -645,22 +577,22 @@ export class BluetoothLeMock extends BluetoothLe {
   }> {
     return Promise.resolve({ isScanning: false })
   }
-  isBonded(params: AddressParams): Promise<{
+  isBonded(params: BlePluginParams.AddressParams): Promise<{
     isBonded: boolean;
   }> {
     return Promise.resolve({ isBonded: true })
   }
-  wasConnected(params: AddressParams): Promise<{
+  wasConnected(params: BlePluginParams.AddressParams): Promise<{
     wasConnected: boolean;
   }> {
     return Promise.resolve({ wasConnected: true })
   }
-  isConnected(params: AddressParams): Promise<{
+  isConnected(params: BlePluginParams.AddressParams): Promise<{
     isConnected: boolean;
   }> {
     return Promise.resolve({ isConnected: true })
   }
-  isDiscovered(params: AddressParams): Promise<{
+  isDiscovered(params: BlePluginParams.AddressParams): Promise<{
     isDiscovered: boolean;
   }> {
     return Promise.resolve({ isDiscovered: true })
