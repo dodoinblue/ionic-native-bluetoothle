@@ -50,6 +50,12 @@ export interface CharacteristicPath {
   characteristic: string
 }
 
+export interface IConnectionStatus {
+  name: string
+  address: string
+  status: 'connected' | 'disconnected'
+}
+
 // creating temporary enums to avoid ts compiler warning.
 // https://github.com/Microsoft/TypeScript/issues/10570
 export enum InitStatus {
