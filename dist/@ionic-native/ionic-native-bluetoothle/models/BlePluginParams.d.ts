@@ -38,6 +38,11 @@ export interface CharacteristicPath {
     service: string;
     characteristic: string;
 }
+export interface IConnectionStatus {
+    name: string;
+    address: string;
+    status: 'connected' | 'disconnected';
+}
 export declare enum InitStatus {
     enable = "enabled",
     disable = "disabled",
