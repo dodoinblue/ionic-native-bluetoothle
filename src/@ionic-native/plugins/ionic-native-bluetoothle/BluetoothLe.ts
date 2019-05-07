@@ -42,11 +42,7 @@ export class BluetoothLe extends IonicNativePlugin {
      * continuously be used whenever Bluetooth is enabled or disabled & gatt server events.
      * @param params @see InitParams
      */
-  @Cordova({
-    callbackOrder: 'reverse',
-    callbackStyle: 'object',
-    observable: true
-  })
+  @Cordova({ successIndex: 0, errorIndex: 2, observable: true })
   initialize(params?: InitParams): Observable<{ status: 'enabled' | 'disabled', message?: string }> {
     return
   }
