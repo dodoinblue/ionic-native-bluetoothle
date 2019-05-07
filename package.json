@@ -1,6 +1,6 @@
 {
   "name": "bluetoothle",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Native plugin wrappers for randdusing/cordova-plugin-bluetoothle",
   "author": "Charles Liu <dodoinblue@gmail.com>",
   "license": "MIT",

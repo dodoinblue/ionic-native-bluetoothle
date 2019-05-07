@@ -308,11 +308,7 @@ var BluetoothLe = (function (_super) {
     /** @nocollapse */
     BluetoothLe.ctorParameters = function () { return []; };
     __decorate([
-        Cordova({
-            callbackOrder: 'reverse',
-            callbackStyle: 'object',
-            observable: true
-        }),
+        Cordova({ successIndex: 0, errorIndex: 2, observable: true }),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", Observable)
